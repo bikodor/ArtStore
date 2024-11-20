@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Основной контейнер для страницы товара -->
+    <section id="product-details">
+        <div class="product-image">
+            {% if post.photo %}
+            <img src="{{ post.photo.url }}" alt="{{ post.title }}">
+            {% else %}
+            <img src="{% static 'images/500.png' %}" alt="{{ post.title }}">
+            {% endif %}
+
+        </div>
+        <div class="product-info">
+            <h2>{{ post.title }}</h2>
+            <p class="price">${{ post.price }}</p>
+            <p class="rating">Rating: {{ post.rating }} ★</p>
+            <p>
+                {{ post.description }}
+            </p>
+            <ul>
+                <li>Processor: Intel Core i7</li>
+                <li>RAM: 16GB</li>
+                <li>Storage: 512GB SSD</li>
+                <li>Screen: 15.6" Full HD</li>
+                <li>Graphics: NVIDIA GTX 1650</li>
+                <li>Battery: Up to 12 hours</li>
+            </ul>
+            <button id="buy-button">Buy Now</button>
+        </div>
+    </section>
+
+{% endblock %}

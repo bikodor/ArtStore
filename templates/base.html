@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'store/css/styles.css' %}">
+</head>
+<body>
+    <!-- Хедер -->
+    <header>
+        {% if request.resolver_match.url_name == "home" %}
+        <h1><a href="{% url 'home' %}">My Shop</a></h1>
+        <input type="text" id="search-bar" placeholder="Search for products...">
+        {% else %}
+        <h1>{{ title }}</h1>
+        <a href="{% url 'home' %}" id="back-to-shop">Back to Shop</a>
+        {% endif %}
+        <div class="icon-group">
+            <div class="user-container">
+                <a href="#">
+                <img src="{% static 'icons/user.svg' %}" alt="User Profile" class="icon">
+                </a>
+            </div>
+            <div class="cart-container">
+                <a href="{% url 'basket' %}">
+                <img src="{% static 'icons/cart.svg' %}" alt="Cart" class="icon">
+                <span id="cart-count">0</span>
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

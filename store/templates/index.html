@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Секция категорий -->
+    <nav>
+        <ul id="categories">
+            <li>Electronics</li>
+            <li>Books</li>
+            <li>Clothing</li>
+            <li>Home & Garden</li>
+        </ul>
+    </nav>
+
+    <!-- Список товаров -->
+    <section id="products">
+    {% for p in posts %}
+    <div class="product-card">
+        {% if p.photo %}
+        <img src="{{ p.photo.url }}" alt="{{ p.title }}">
+        {% else %}
+        <img src="{% static 'images/180.png' %}" alt="{{ p.title }}">
+        {% endif %}
+        <div class="product-details">
+            <h3>{{ p.title }}</h3>
+            <p class="price">${{ p.price }}</p>
+            <p class="rating">Rating: {{ p.rating }} ★</p>
+            <p>{{ p.short_desc }}</p>
+            <div class="button-group">
+                <button onclick="addToCart({{ p.id }})">Add to Cart</button>
+                <button>
+                    <a href="{{ p.get_absolute_url }}">View Details</a>
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+{% endblock %}
+
